@@ -2,29 +2,45 @@ import socket
 import select
 import errno
 import sys
+import json
+import os
 
 HEADER_LENGTH = 10
 IP = "192.168.44.1"
 PORT = 5000
 
 my_username = input("username: ")
+
+print("Available Users:")
+f = open("C:/Users/irem_/Documents/GitHub/ChatApplication/Service_Listener/OnlineUsers.txt", "r")
+i=0
+ipList = list()
+
+for x in f:
+            b = json.loads(x)            
+            print(str(i) + "--" + b["username"])
+            ipList.append(b["ipaddress"])
+            i = i + 1
+
+indx=int(input("Choose someone's number to talk = "))
+chosenIp=ipList[indx]
+
 client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-client_socket.connect((IP,PORT))
+client_socket.connect((chosenIp,PORT))
 client_socket.setblocking(False)
 
 username = my_username.encode("utf-8")
 username_header = f'{len(username):<{HEADER_LENGTH}}'.encode("utf-8")    
 client_socket.send(username_header + username)
-while True:
-    message = input(f"{my_username} >")   
 
+while True:
+    message = input(f"{my_username} >")
     if message:
         message = message.encode("utf-8")
-        message_header = f'{len(username):<{HEADER_LENGTH}}'.encode("utf-8") 
+        message_header = f'{len(message):<{HEADER_LENGTH}}'.encode("utf-8") 
         client_socket.send(message_header + message)
     try:
         while True:
-
          username_header = client_socket.recv(HEADER_LENGTH)
          if not len(username_header):
             print("Connection closed by the server")
@@ -32,13 +48,13 @@ while True:
          username_length = int(username_header.decode("utf-8").strip())
          username = client_socket.recv(username_length).decode("utf-8")
 
-         message_header=client_socket.recv(HEADER_LENGTH)
-         message_length=int(message_header.decode("utf-8").strip())
-         message=client_socket.recv(message_length).decode("utf-8")
+         message_header = client_socket.recv(HEADER_LENGTH)
+         message_length = int(message_header.decode("utf-8").strip())
+         message = client_socket.recv(message_length).decode("utf-8")
          print(f'{username} > {message}') 
 
     except IOError as e:
-        if e.errno !=errno.EAGAIN and e.errno !=errno.EWOULDBLOCK:
+        if e.errno != errno.EAGAIN and e.errno != errno.EWOULDBLOCK:
             print('Reading error'.str(e))
             sys.exit()
         continue

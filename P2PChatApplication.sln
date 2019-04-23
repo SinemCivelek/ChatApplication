@@ -7,6 +7,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Chat_Client", "Chat_Client\
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Chat_Listener", "Chat_Listener\Chat_Listener.pyproj", "{33788DDC-9F4A-4D30-949E-53DDFEA47BE2}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Service_Listener", "Service_Listener\Service_Listener.pyproj", "{21122575-4C9D-4E78-AF80-0A453D90D30B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,8 @@ Global
 		{471D3F6F-D7A0-48AB-B5D6-E262C5563518}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33788DDC-9F4A-4D30-949E-53DDFEA47BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33788DDC-9F4A-4D30-949E-53DDFEA47BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21122575-4C9D-4E78-AF80-0A453D90D30B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21122575-4C9D-4E78-AF80-0A453D90D30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
